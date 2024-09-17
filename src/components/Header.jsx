@@ -1,16 +1,14 @@
 import { useContext } from "react";
 import { WeatherContext } from "../WeatherContext";
+import TemperatureConverter from "./TemperatureConverter";
 
 const Header = () => {
-  const { darkMode, setDarkMode, unit, setUnit } = useContext(WeatherContext);
+  const { darkMode, setDarkMode } = useContext(WeatherContext);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
-  const toggleUnit = () => {
-    setUnit(unit === "metric" ? "imperial" : "metric");
-  };
 
   const styles = {
     container: {
@@ -43,7 +41,7 @@ const Header = () => {
       color: "#fff",
     },
     logo: {
-      width: "100px",
+      width: "200px",
       height: "auto",
     },
     title: {
@@ -56,19 +54,21 @@ const Header = () => {
     <div style={styles.container}>
       <img src="wahala.png" alt="Wahala Logo" style={styles.logo} />
       <div style={styles.header}>
-        <div style={styles.title}>
-          {<i className="fa-solid fa-circle-half-stroke"></i> ? (
-            <i className="fa-solid fa-moon"></i>
-          ) : (
-            <i className="fa-solid fa-lightbulb"></i>
-          )}
+        <div className={darkMode ? "dark-mode" : "light-mode"}>
+          <div className="container">
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={darkMode}
+                onChange={toggleDarkMode}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
         </div>
-        <button onClick={toggleDarkMode} style={styles.button}>
-          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-        </button>
-        <button onClick={toggleUnit} style={styles.button}>
-          {unit === "metric" ? "Switch to Fahrenheit" : "Switch to Celsius"}
-        </button>
+        <div>
+          <TemperatureConverter />
+        </div>
       </div>
     </div>
   );

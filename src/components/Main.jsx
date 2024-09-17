@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { WeatherContext } from "../WeatherContext";
 
 const Main = () => {
-  const { weatherData, loading, error, setWeatherData, setLoading, setError } =
+  const { weatherData, loading, error, setWeatherData, setLoading, setError,language } =
     useContext(WeatherContext);
 
   const [city, setCity] = useState("");
@@ -94,8 +94,21 @@ const Main = () => {
     },
   };
 
+  const text = {
+    location:{
+        en:"Location",
+        de:"Ort"
+    },
+    temperature:{
+        en:"Temperature",
+        de:"Temperatur"
+    }
+
+  }
+
   return (
     <div style={styles.container}>
+        <h3>The Only Weather App You Need !</h3>
       <form onSubmit={handleSearch} style={styles.form}>
         <input
           type="text"
@@ -112,14 +125,18 @@ const Main = () => {
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
-          <p>Error: {error.message}</p>
+          <div>
+            <h1>Page not found</h1>
+            <img src="https://effulgent-brioche-795ac4.netlify.app/static/media/search.154f1af7b63834ca7cfea206d216ebce.svg" alt="" />
+          </div>
+         
         ) : (
           <div style={styles.weatherContainer}>
             <p style={styles.weatherParagraphe}>
-              <i className="fa-solid fa-location-dot"></i> Location: {weatherData.name}
+              <i className="fa-solid fa-location-dot"></i> {text.location[language]}: {weatherData.name}
             </p>
             <p style={styles.weatherParagraphe}>
-              <i className="fa-solid fa-temperature-high"></i> Temperature: {weatherData.main.temp}°C
+              <i className="fa-solid fa-temperature-high"></i> {text.temperature[language]}: {weatherData.main.temp}°C
             </p>
             <p style={styles.weatherParagraphe}>
               <i className={getWeatherIconClass(weatherData.weather[0].description)}></i> Weather: {weatherData.weather[0].description}
