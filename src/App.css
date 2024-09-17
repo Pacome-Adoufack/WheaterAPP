@@ -1,0 +1,31 @@
+
+
+.App {
+  text-align: center;
+  background-color: white;
+  color: black;
+  height: 100vh;
+
+
+}
+
+.dark-mode {
+  background-color: #333;
+  color: white;
+  
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: rgb(102, 13, 13);
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
