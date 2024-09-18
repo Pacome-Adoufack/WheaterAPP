@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { WeatherContext } from "../WeatherContext";
 
 const TemperatureToggle = () => {
-  const {isCelsius, setIsCelsius} = useContext(WeatherContext);
+  const { isCelsius, setIsCelsius } = useContext(WeatherContext);
 
   const toggleTemperature = () => {
     setIsCelsius(!isCelsius);
@@ -10,18 +10,21 @@ const TemperatureToggle = () => {
 
   const styles = {
     container: {
-      textAlign: 'center',
-      marginTop: '50px',
+      textAlign: "center",
+      marginTop: "10px",
+      position: "relative",
+      
     },
     labelText: {
-      fontSize: '18px',
-      marginRight: '10px',
+      fontSize: "18px",
+      marginRight: "50px",
+      
     },
     switch: {
-      position: 'relative',
-      display: 'inline-block',
-      width: '60px',
-      height: '34px',
+      position: "relative",
+      display: "inline-block",
+      width: "60px",
+      height: "34px",
     },
     switchInput: {
       opacity: 0,
@@ -29,42 +32,48 @@ const TemperatureToggle = () => {
       height: 0,
     },
     slider: {
-      position: 'absolute',
-      cursor: 'pointer',
+      position: "absolute",
+      cursor: "pointer",
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: '#ccc',
-      transition: '0.4s',
+      backgroundColor: "#ccc",
+      transition: "0.4s",
     },
     sliderBefore: {
-      position: 'absolute',
+      position: "absolute",
       content: '""',
-      height: '26px',
-      width: '26px',
-      left: '4px',
-      bottom: '4px',
-      backgroundColor: 'white',
-      transition: '0.4s',
-      borderRadius: '50%',
+      height: "26px",
+      width: "26px",
+      left: "4px",
+      bottom: "4px",
+      backgroundColor: "white",
+      transition: "0.4s",
+      borderRadius: "50%",
     },
     sliderChecked: {
-      backgroundColor: '#2196F3',
+      backgroundColor: "#2196F3",
     },
     sliderCheckedBefore: {
-      transform: 'translateX(26px)',
+      transform: "translateX(26px)",
     },
     text: {
-      marginTop: '20px',
-      fontSize: '20px',
+      marginTop: "20px",
+      fontSize: "20px",
     },
   };
 
   return (
     <div style={styles.container}>
       <label style={styles.labelText}>
-        {isCelsius ? '°C' : '°F'}
+          {isCelsius ? (
+            <div style={{ position: "absolute", top: "10px", left: "55px",zIndex:"1" }}>
+              °C
+            </div>
+          ) : (
+            <div style={{ position: "absolute", top: "10px", left: "80px",zIndex:"1" }}>°F</div>
+          )}
       </label>
       <label style={styles.switch}>
         <input
@@ -74,7 +83,7 @@ const TemperatureToggle = () => {
           style={styles.switchInput}
         />
         <span className="slider"></span>
-        </label>
+      </label>
     </div>
   );
 };

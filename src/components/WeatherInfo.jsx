@@ -71,7 +71,30 @@ const WeatherInfo = () => {
       es: "Temperatura",
       fr: "Température",
     },
-
+   h1:{
+      en: "Page not found",
+      de: "Seite nicht gefunden",
+      es: "Página no encontrada",
+      fr: "Page non trouvée",
+   },
+   WindSpeed : {
+      en: "Wind Speed",
+      de: "Windgeschwindigkeit",
+      es: "Velocidad del viento",
+      fr: "Vitesse du vent",
+    },
+    WindDegree : {
+      en: "Wind Degree",
+      de: "Windgrad",
+      es: "Grado de viento",
+      fr: "Degré de vent",
+    },
+    Humidity : {
+      en: "Humidity",
+      de: "Luftfeuchtigkeit",
+      es: "Humedad",
+      fr: "Humidité",
+    },
   };
 
   return (
@@ -81,7 +104,7 @@ const WeatherInfo = () => {
           <p>Loading...</p>
         ) : error ? (
           <div>
-            <h1 style={styles.error}>Page not found</h1>
+            <h1 style={styles.error}>{text.h1[language]}</h1>
             <img
               style={{ width: "500px" }}
               src="https://effulgent-brioche-795ac4.netlify.app/static/media/search.154f1af7b63834ca7cfea206d216ebce.svg"
@@ -125,15 +148,15 @@ const WeatherInfo = () => {
                 {weatherData.weather[0].description}
               </p>
               <p style={styles.weatherParagraphe}>
-                <i className="fa-solid fa-wind"></i> Wind Speed: <br />
+                <i className="fa-solid fa-wind"></i> {text.WindSpeed[language]}: <br />
                 {weatherData.wind.speed} m/s
               </p>
               <p style={styles.weatherParagraphe}>
-                <i className="fa-solid fa-compass"></i> Wind Degree: <br />
+                <i className="fa-solid fa-compass"></i> {text.WindDegree[language]}: <br />
                 {weatherData.wind.deg}°
               </p>
               <p style={styles.weatherParagraphe}>
-                <i className="fa-solid fa-tint"></i> Humidity: <br />
+                <i className="fa-solid fa-tint"></i> {text.Humidity[language]}: <br />
                 {weatherData.main.humidity}%
               </p>
             </div>

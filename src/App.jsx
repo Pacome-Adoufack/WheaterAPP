@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import { WeatherContext } from "./WeatherContext";
-import Languages from "./components/Languages";
+// import Languages from "./components/Languages";
 
 
 function App() {
