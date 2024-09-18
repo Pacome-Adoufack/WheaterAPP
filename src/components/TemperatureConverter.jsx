@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { WeatherContext } from "../WeatherContext";
 
 const TemperatureToggle = () => {
-  const [isCelsius, setIsCelsius] = useState(true); // Startet mit Celsius als Standard
+  const {isCelsius, setIsCelsius} = useContext(WeatherContext);
 
   const toggleTemperature = () => {
     setIsCelsius(!isCelsius);
@@ -63,31 +64,17 @@ const TemperatureToggle = () => {
   return (
     <div style={styles.container}>
       <label style={styles.labelText}>
-        {isCelsius ? 'Celsius' : 'Fahrenheit'}
+        {isCelsius ? '°C' : '°F'}
       </label>
       <label style={styles.switch}>
         <input
           type="checkbox"
+          checked={isCelsius}
           onChange={toggleTemperature}
           style={styles.switchInput}
         />
-        <span
-          style={{
-            ...styles.slider,
-            ...(document.querySelector('input:checked') ? styles.sliderChecked : {}),
-          }}
-        >
-          <span
-            style={{
-              ...styles.sliderBefore,
-              ...(document.querySelector('input:checked') ? styles.sliderCheckedBefore : {}),
-            }}
-          ></span>
-        </span>
-      </label>
-      <p style={styles.text}>
-        Aktuelle Einheit: {isCelsius ? '°C' : '°F'}
-      </p>
+        <span className="slider"></span>
+        </label>
     </div>
   );
 };

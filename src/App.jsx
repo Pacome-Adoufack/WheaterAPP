@@ -5,12 +5,14 @@ import Main from "./components/Main";
 import { WeatherContext } from "./WeatherContext";
 import Languages from "./components/Languages";
 
+
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState("en");
+  const [isCelsius, setIsCelsius] = useState(true);
 
   useEffect(() => {
     const fetchWeather = async (latitude, longitude) => {
@@ -47,9 +49,10 @@ function App() {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      minHeight: "100vh",
-      backgroundColor: darkMode ? "black" : "white",
-      color: darkMode ? "white" : "black",
+      maxWidth:"80%",
+      marginLeft:"auto",
+      marginRight:"auto",
+      height:"500px"
     },
     content: {
       textAlign: "center",
@@ -70,13 +73,13 @@ function App() {
         setError,
         language,
         setLanguage,
+        isCelsius, 
+        setIsCelsius
       }}>
       <div style={styles.appContainer}>
         <div style={styles.content}>
           <Header />
-          <Languages />
           <Main />
-          
         </div>
       </div>
     </WeatherContext.Provider>

@@ -9,7 +9,6 @@ const Header = () => {
     setDarkMode(!darkMode);
   };
 
-
   const styles = {
     container: {
       textAlign: "center",
@@ -19,7 +18,7 @@ const Header = () => {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      backgroundColor: darkMode ? "#333" : "#f5f5f5",
+      backgroundColor: darkMode ? "#333" : "#4b71b6",
       color: darkMode ? "#fff" : "#000",
       borderRadius: "5px",
     },
@@ -28,7 +27,7 @@ const Header = () => {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      width: "100%",
+      maxWidth: "80%",
     },
     button: {
       padding: "10px 20px",
@@ -41,8 +40,9 @@ const Header = () => {
       color: "#fff",
     },
     logo: {
-      width: "200px",
+      width: "100px",
       height: "auto",
+      marginRight: "20px",
     },
     title: {
       flex: 1,
@@ -54,7 +54,7 @@ const Header = () => {
     <div style={styles.container}>
       <img src="wahala.png" alt="Wahala Logo" style={styles.logo} />
       <div style={styles.header}>
-        <div className={darkMode ? "dark-mode" : "light-mode"}>
+        <div>
           <div className="container">
             <label className="switch">
               <input
@@ -64,6 +64,39 @@ const Header = () => {
               />
               <span className="slider round"></span>
             </label>
+            {darkMode ? (
+              <svg
+                stroke="currentColor"
+                fill="none"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ color: "rgb(166, 221, 240)" }}
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+              </svg>
+            ) : (
+              <svg
+                stroke="currentColor"
+                fill="none"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ color: "rgb(245, 195, 44)" }}
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path>
+              </svg>
+            )}
           </div>
         </div>
         <div>

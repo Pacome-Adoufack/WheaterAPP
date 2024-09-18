@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { WeatherContext } from "../WeatherContext";
+import WeatherInfo from "./WeatherInfo";
 
 const Main = () => {
-  const { weatherData, loading, error, setWeatherData, setLoading, setError,language } =
-    useContext(WeatherContext);
+  const { setWeatherData, setLoading, setError,darkMode  } = useContext(WeatherContext);
 
   const [city, setCity] = useState("");
 
@@ -33,82 +33,57 @@ const Main = () => {
     fetchWeather(city);
   };
 
-  const getWeatherIconClass = (description) => {
-    if (description.includes("rain")) {
-      return "fa-solid fa-cloud-rain";
-    } else if (description.includes("clear")) {
-      return "fa-solid fa-sun";
-    } else if (description.includes("cloud")) {
-      return "fa-solid fa-cloud";
-    } else {
-      return "fa-solid fa-smog";
-    }
-  };
-
   const styles = {
     container: {
       textAlign: "center",
       padding: "20px",
       fontFamily: "Arial, sans-serif",
-      minHeight: "100vh",
+      backgroundColor: darkMode ? "#333" : "#4b71b6",
+      color: darkMode ? "#fff" : "#000",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom:"-600px"
+      
+    },
+    header: {
+      fontSize: "2.5rem",
+      fontWeight: "bold",
     },
     form: {
+      display: "flex",
+      justifyContent: "center",
       marginBottom: "20px",
     },
     input: {
       padding: "10px",
-      fontSize: "16px",
+      fontSize: "18px",
       marginRight: "10px",
-      borderRadius: "5px",
-      border: "1px solid #ccc",
+      borderRadius: "30px",
+      border: "1px solid #007bff",
+      outline: "none",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     },
     button: {
-      padding: "10px 20px",
-      fontSize: "16px",
+      padding: "10px 30px",
+      fontSize: "18px",
       cursor: "pointer",
-      borderRadius: "5px",
+      borderRadius: "30px",
       border: "none",
       backgroundColor: "#007bff",
       color: "#fff",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      transition: "background-color 0.3s ease",
     },
-    weatherInfo: {
-      marginTop: "20px",
-    },
-    weatherContainer: {
-      border: "1px solid #ccc",
-      padding: "20px",
-      borderRadius: "10px",
-      display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
-      gap: "10px",
-      backgroundColor: "#fff",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    },
-    weatherParagraphe: {
-      margin: "5px",
-      border: "1px solid #ccc",
-      padding: "10px",
-      borderRadius: "5px",
-      backgroundColor: "#f9f9f9",
-      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    buttonHover: {
+      backgroundColor: "#0056b3",
     },
   };
 
-  const text = {
-    location:{
-        en:"Location",
-        de:"Ort"
-    },
-    temperature:{
-        en:"Temperature",
-        de:"Temperatur"
-    }
-
-  }
-
   return (
     <div style={styles.container}>
-        <h3>The Only Weather App You Need !</h3>
+      <h3 style={styles.header}>The Only Weather App You Need!</h3>
       <form onSubmit={handleSearch} style={styles.form}>
         <input
           type="text"
@@ -121,38 +96,7 @@ const Main = () => {
           Search
         </button>
       </form>
-      <div style={styles.weatherInfo}>
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <div>
-            <h1>Page not found</h1>
-            <img src="https://effulgent-brioche-795ac4.netlify.app/static/media/search.154f1af7b63834ca7cfea206d216ebce.svg" alt="" />
-          </div>
-         
-        ) : (
-          <div style={styles.weatherContainer}>
-            <p style={styles.weatherParagraphe}>
-              <i className="fa-solid fa-location-dot"></i> {text.location[language]}: {weatherData.name}
-            </p>
-            <p style={styles.weatherParagraphe}>
-              <i className="fa-solid fa-temperature-high"></i> {text.temperature[language]}: {weatherData.main.temp}°C
-            </p>
-            <p style={styles.weatherParagraphe}>
-              <i className={getWeatherIconClass(weatherData.weather[0].description)}></i> Weather: {weatherData.weather[0].description}
-            </p>
-            <p style={styles.weatherParagraphe}>
-              <i className="fa-solid fa-wind"></i> Wind Speed: {weatherData.wind.speed} m/s
-            </p>
-            <p style={styles.weatherParagraphe}>
-              <i className="fa-solid fa-compass"></i> Wind Degree: {weatherData.wind.deg}°
-            </p>
-            <p style={styles.weatherParagraphe}>
-              <i className="fa-solid fa-tint"></i> Humidity: {weatherData.main.humidity}%
-            </p>
-          </div>
-        )}
-      </div>
+      <WeatherInfo />
     </div>
   );
 };
